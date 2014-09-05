@@ -1,4 +1,4 @@
-# Deploying on dokku
+# Deploying harp static files on dokku served by nginx
 
 [Dokku](https://github.com/progrium/dokku) is a Docker powered mini-Heroku in around 100 lines of Bash.
 
