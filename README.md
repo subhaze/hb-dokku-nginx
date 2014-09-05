@@ -6,7 +6,26 @@ If you’re familiar with using git in the command line, you’ll have no troubl
 
 ## Setup a dokku environment
 
-You can install Dokku on your own by following the instructions [here](https://github.com/progrium/dokku#requirements) or another approach is using a DigitalOcean [dropplet](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-dokku-application).
+You can install Dokku on your own by following the instructions [here](https://github.com/progrium/dokku#requirements) or another approach is using a DigitalOcean [dropplet](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-dokku-application) (which is the method I've been using).
+
+**Heads Up** If you go to push your app, see some 404s on ubuntu packages and get a message about the push being rejected you probably need to update your buildstep.
+
+This might take a little while so grab a coffee/tea, take a walk, etc...
+
+```
+ssh username@example.com
+git clone https://github.com/progrium/buildstep.git
+cd buildstep
+sudo make build
+```
+
+If this doesn't resolve the 404/rejected push you could try updating the Docker DNS
+
+Open `/etc/default/docker`
+
+Add/Uncomment `DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"`
+
+Detailed [instructions](https://robinwinslow.co.uk/2014/08/27/fix-docker-networking/) on updating the DNS.
 
 ## Overriding nginx configurations
 
