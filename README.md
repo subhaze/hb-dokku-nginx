@@ -18,7 +18,7 @@ With this dokku buildpack you should be able to override some nginx settings. I'
 
 ### 1. Running locally
 
-You'll need harp installed globally `npm install -g harp` then you can initiate the project via `harp init -b subhaze/hb-dokku <app-name-here>`. Harp will create a new directory based on your app's name with the files in this repository inside it. Now you can `cd <app-name-here>` and run `harp server` so get the project up and running locally.
+You'll need harp installed globally `npm install -g harp` then you can initiate the project via `harp init -b subhaze/hb-dokku-nginx <app-name-here>`. Harp will create a new directory based on your app's name with the files in this repository inside it. Now you can `cd <app-name-here>` and run `harp server` so get the project up and running locally.
 
 ### 2. Setting up the remote repo
 
