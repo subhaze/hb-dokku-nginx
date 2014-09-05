@@ -16,13 +16,13 @@ With this dokku buildpack you should be able to override some nginx settings. I'
 
 **Requirements:** git, node 0.10.x, npm 1.2.x
 
-### 1. Setting up the remote repo
+### 1. Running locally
 
-Clone this repo to your location machine `git clone https://github.com/subhaze/hb-dokku-nginx.git <your_app_name>` then `cd <your_app_name>` into the folder you cloned to and setup the remote repo, which should be something like: `git remote add dokku dokku@<your_domain>:<your_app_name>`
+You'll need harp installed globally `npm install -g harp` then you can initiate the project via `harp init -b subhaze/hb-dokku <app-name-here>`. Harp will create a new directory based on your app's name with the files in this repository inside it. Now you can `cd <app-name-here>` and run `harp server` so get the project up and running locally.
 
-### 2. Running locally
+### 2. Setting up the remote repo
 
-If you have harp installed globally `npm install -g harp` you can start up the harp server via `harp server`. If you don't have harp setup you can run `npm install` to install it locally and then you can start up the app via `node_modules/.bin/harp server`
+You'll need to intiate a git repo via `git init` then you'll need to add files for git to track `git add .` and commit them `git commit -am "init commit"`. Now you'll need to setup your remote repo to connect to your dokku setup which would be something like the following: `git remote add dokku dokku@<your_domain>:<your_app_name>`. `<your-app-name>` can really be anything you like, but, remember this will be the sub-domain used to serve your app.
 
 ### 3. Deploying your app
 
