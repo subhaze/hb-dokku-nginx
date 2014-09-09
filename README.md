@@ -1,4 +1,4 @@
-# Deploying on dokku
+# Deploying harp static files on dokku served by nginx
 
 [Dokku](https://github.com/progrium/dokku) is a Docker powered mini-Heroku in around 100 lines of Bash.
 
@@ -6,7 +6,26 @@ If you’re familiar with using git in the command line, you’ll have no troubl
 
 ## Setup a dokku environment
 
-You can install Dokku on your own by following the instructions [here](https://github.com/progrium/dokku#requirements) or another approach is using a DigitalOcean [dropplet](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-dokku-application).
+You can install Dokku on your own by following the instructions [here](https://github.com/progrium/dokku#requirements) or another approach is using a DigitalOcean [dropplet](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-dokku-application) (which is the method I've been using).
+
+**Heads Up** If you go to push your app, see some 404s on ubuntu packages and get a message about the push being rejected you probably need to update your buildstep.
+
+This might take a little while so grab a coffee/tea, take a walk, etc...
+
+```
+ssh username@example.com
+git clone https://github.com/progrium/buildstep.git
+cd buildstep
+sudo make build
+```
+
+If this doesn't resolve the 404/rejected push you could try updating the Docker DNS
+
+Open `/etc/default/docker`
+
+Add/Uncomment `DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"`
+
+Detailed [instructions](https://robinwinslow.co.uk/2014/08/27/fix-docker-networking/) on updating the DNS.
 
 ## Overriding nginx configurations
 
@@ -16,13 +35,13 @@ With this dokku buildpack you should be able to override some nginx settings. I'
 
 **Requirements:** git, node 0.10.x, npm 1.2.x
 
-### 1. Setting up the remote repo
+### 1. Running locally
 
-Clone this repo to your location machine `git clone https://github.com/subhaze/hb-dokku-nginx.git <your_app_name>` then `cd <your_app_name>` into the folder you cloned to and setup the remote repo, which should be something like: `git remote add dokku dokku@<your_domain>:<your_app_name>`
+You'll need harp installed globally `npm install -g harp` then you can initiate the project via `harp init -b subhaze/hb-dokku-nginx <app-name-here>`. Harp will create a new directory based on your app's name with the files in this repository inside it. Now you can `cd <app-name-here>` and run `harp server` so get the project up and running locally.
 
-### 2. Running locally
+### 2. Setting up the remote repo
 
-If you have harp installed globally `npm install -g harp` you can start up the harp server via `harp server`. If you don't have harp setup you can run `npm install` to install it locally and then you can start up the app via `node_modules/.bin/harp server`
+You'll need to intiate a git repo via `git init` then you'll need to add files for git to track `git add .` and commit them `git commit -am "init commit"`. Now you'll need to setup your remote repo to connect to your dokku setup which would be something like the following: `git remote add dokku dokku@<your_domain>:<your_app_name>`. `<your-app-name>` can really be anything you like, but, remember this will be the sub-domain used to serve your app.
 
 ### 3. Deploying your app
 
